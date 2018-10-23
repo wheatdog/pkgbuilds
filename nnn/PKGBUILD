@@ -11,7 +11,7 @@ makedepends=("pkgconf")
 url="https://github.com/jarun/nnn"
 license=('CUSTOM')
 source=("https://github.com/jarun/nnn/archive/v${pkgver//_/-}.tar.gz" "nnn.desktop")
-sha256sums=('0029efd3d009c197b1646d260350f3f87edca76eef3be6b81846af133d58d6a9')
+sha256sums=('0029efd3d009c197b1646d260350f3f87edca76eef3be6b81846af133d58d6a9' 'SKIP')
 
 package() {
   pkg_loc="${pkgname}-${pkgver}"
