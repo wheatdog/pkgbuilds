@@ -1,0 +1,31 @@
+# Idea: swiergot (https://bbs.archlinux.org/viewtopic.php?id=16754)
+# Code update: Alad W (http://github.com/AladW)
+# Package: Jakob (http://github.com/nasenatmer)
+
+pkgname=dotpac
+pkgver=0.4
+pkgrel=5
+pkgdesc="Bash script to get rid of *.pac* files."
+arch=(any)
+license=('BSD')
+url="http://wiki.archlinux.org/index.php/dotpac"
+depends=('bash' 'dialog')
+source=('https://raw.githubusercontent.com/AladW/dotpac/master/dotpac'
+        '0000-vim-diff.patch')
+md5sums=('7984de79ee51711b5b26eaf4e477b6df'
+         'SKIP')
+
+prepare() {
+  cd $srcdir
+  for file in "${source[@]}"; do
+      if [[ "$file" == *.diff || "$file" == *.patch ]]; then
+          # add all patches present in source array
+          patch --follow-symlinks -p1 <"$srcdir/$(basename ${file})"
+      fi
+  done
+}
+
+package() {
+	install -D -m755 dotpac $pkgdir/usr/bin/dotpac
+}
+

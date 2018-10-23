@@ -1,0 +1,26 @@
+--- a/dotpac	2018-06-25 20:53:30.821541329 +0800
++++ b/dotpac	2018-06-25 20:52:55.278209531 +0800
+@@ -104,12 +104,13 @@
+ --ok-label "Finish"
+ --menu "Now that you know why $1 was left and you have seen the differences \
+ between the two files, you can decide what to do with them. What would you like to do?"
+-15 56 5
++16 56 6
+ 1 "Remove the $3 file."
+ 2 "Remove the $3 file and edit the $4 one."
+ 3 "Replace the $4 file with the $5 and edit."
+ 4 "Just replace the $4 file with the $5."
+ 5 "Nothing."
++6 "Vimdiff the $3 and $4 files."
+ EOF
+ 
+ 		dialog --file $tmpdir/dialog 2> $tmpdir/exitcode
+@@ -132,6 +133,8 @@
+ 			"$texted" "$2"
+ 		elif [ $choice == 4 ]; then
+ 			mv -f "$1" "$2"
++        elif [ $choice == 6 ]; then
++            vimdiff -o "$1" "$2"
+ 		fi
+ 
+ 		return 0

@@ -1,0 +1,18 @@
+# Maintainer: Pablo Arias <pabloariasal@gmail.com>
+# Contributor: John Jenkins <twodopeshaggy@gmail.com>
+
+pkgname=nnn-desktop
+pkgver=0.1
+pkgrel=1
+pkgdesc="The missing terminal file browser for X."
+arch=("i686" "x86_64")
+depends=("ncurses" "readline")
+url="https://github.com/jarun/nnn"
+license=('CUSTOM')
+source=("https://github.com/jarun/nnn/archive/v${pkgver//_/-}.tar.gz" "nnn.desktop")
+sha256sums=('65c364a9797178e40ec7ec653b2cfa8e211e556b75250bf72eb5eea57f5e0cdc' 'SKIP')
+
+package() {
+  make -C "${pkgname}-$pkgver" DESTDIR="${pkgdir}" PREFIX="/usr" install
+  install -Dm0644 "${srcdir}/nnn.desktop" "${pkgdir}/usr/share/applications/nnn.desktop"
+}
